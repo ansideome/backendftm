@@ -92,4 +92,22 @@ class DataController extends Controller
             200
         );
     }
+
+    public function deleteDatabyQuery(Request $request)
+    {
+        $request->validate([
+            'sto' => 'required|string',
+            'nama_lemari_ftm_oakses' => 'required|string',
+        ]);
+
+        Data::where('sto', $request->sto)
+            ->where('nama_lemari_ftm_oakses', $request->nama_lemari_ftm_oakses)
+            ->delete();
+
+        return ResponseFormatter::success(
+            '',
+            'Data deleted successfully',
+            200
+        );
+    }
 }
